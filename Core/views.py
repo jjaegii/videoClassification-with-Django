@@ -19,7 +19,7 @@ def uploadFile(request):
             #predictResult = predictResult
         )
         document.save()
-        document.predictResult = prediction.sequence_prediction(uploadedFile.name) 
+        document.predictResult = prediction.predict_action(uploadedFile.name) 
         document.uploadedFile = "Uploaded Files/" + uploadedFile.name.replace(".avi", ".gif")
         document.save()
         print("prediction:" + document.predictResult)
