@@ -20,7 +20,7 @@ def uploadFile(request):
         )
         document.save()
         document.predictResult = prediction.sequence_prediction(uploadedFile.name) 
-        document.uploadedFile = "Uploaded Files/" + uploadedFile.name.replace(".avi", ".gif")
+        document.uploadedFile = "Uploaded Files/" + uploadedFile.name.replace(".mp4", ".gif")
         document.save()
         print("prediction:" + document.predictResult)
         
@@ -30,5 +30,3 @@ def uploadFile(request):
     return render(request, "Core/upload-file.html", context = {
         "files": documents
     })
-
-    # ?
