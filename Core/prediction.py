@@ -21,6 +21,9 @@ EPOCHS = 10
 MAX_SEQ_LENGTH = 20
 NUM_FEATURES = 2048
 
+# 모델 불러오기
+model = tf.keras.models.load_model('/home/jjaegii/django/DjangoFileUpload/Core/humanPoseModel.h5')
+
 def crop_center_square(frame):
     y, x = frame.shape[0:2]
     min_dim = min(y, x)
@@ -87,13 +90,10 @@ def load_video(path, max_frames=0, resize=(IMG_SIZE, IMG_SIZE)):
 # https://www.tensorflow.org/hub/tutorials/action_recognition_with_tf_hub
 def to_gif(images, path):
     converted_images = images.astype(np.uint8)
-    imageio.mimsave("/home/jjaegii/django/DjangoFileUpload/media/Uploaded Files/" + path.replace(".avi", ".gif"), converted_images, fps=10)
+    imageio.mimsave("/home/jjaegii/django/DjangoFileUpload/media/Uploaded Files/" + path.replace(".mp4", ".gif"), converted_images, fps=10)
     # embed.embed_file("/home/jjaegii/django/DjangoFileUpload/media/Uploaded Files/" + path_to_gif + ".gif")
 
 def sequence_prediction(path):
-    # 모델 불러오기
-    model = tf.keras.models.load_model('/home/jjaegii/django/DjangoFileUpload/Core/model.h5')
-
     train_df = pd.read_csv("/home/jjaegii/django/DjangoFileUpload/Core/train.csv")
 
     label_processor = keras.layers.StringLookup(
